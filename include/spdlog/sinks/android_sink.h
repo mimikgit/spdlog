@@ -103,6 +103,12 @@ using android_sink_st = android_sink<details::null_mutex>;
 // Create and register android syslog logger
 
 template<typename Factory = default_factory>
+inline std::shared_ptr<logger> android_logger(const std::string &logger_name, const std::string &tag = "spdlog")
+{
+    return Factory::template create<sinks::android_sink_mt>(logger_name, tag);
+}
+
+template<typename Factory = default_factory>
 inline std::shared_ptr<logger> android_logger_mt(const std::string &logger_name, const std::string &tag = "spdlog")
 {
     return Factory::template create<sinks::android_sink_mt>(logger_name, tag);
